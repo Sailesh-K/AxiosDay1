@@ -11,7 +11,7 @@ function App() {
   }, []);
 
   function fetchData() {
-    axios.get('http://localhost:8000/users')
+    axios.get('https://jsonplaceholder.typicode.com/users')
       .then(response => {
         setData(response.data);
       })
@@ -21,7 +21,7 @@ function App() {
   }
 
   function addData() {
-    axios.post('http://localhost:8000/users', newData)
+    axios.post('https://jsonplaceholder.typicode.com/users', newData)
       .then(response => {
         setData([...data, response.data]);
         setNewData({ name: '' });
@@ -32,7 +32,7 @@ function App() {
   }
 
   function updateData() {
-    axios.put(`http://localhost:8000/users/${selectedData.id}`,selectedData)
+    axios.put(`https://jsonplaceholder.typicode.com/users/${selectedData.id}`,selectedData)
       .then(response => {
         const newData = data.map(item => {
           if (item.id === selectedData.id) {
@@ -49,7 +49,7 @@ function App() {
   }
 
   function deleteData(id) {
-    axios.delete(`http://localhost:8000/users/${id}`)
+    axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then(() => {
         const newData = data.filter(item => item.id !== id);
         setData(newData);
@@ -77,7 +77,7 @@ function App() {
       <ul>
         {data.map(item => (
           <li key={item.id}>
-            {item.name}
+            {item.name},{`id:${item.id}`},{`email:${item.email}`}
             <br />
             <button onClick={() => handleEdit(item)}>Edit</button> 
             <button onClick={() => deleteData(item.id)}>Delete</button>
